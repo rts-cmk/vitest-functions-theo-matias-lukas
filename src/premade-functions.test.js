@@ -18,90 +18,111 @@ describe("findLongestWord", () => {
     expect(findLongestWord("I like peperoni pizza")).toBe("peperoni");
   });
 
-  it("should recieve a string and return the longest word", () => {
-    expect(findLongestWord("I invite you to the tiktok riz party")).toBe(
-      "invite",
-      "tiktok"
-    );
-  });
+    it("should recieve a string and return the longest word", () => {
+        // TODO
+        // expect(...)
+        expect(findLongestWord("en to tre træ")).toBe("tre", "træ")
+    });
+
+
+    // this should fail because "to" is not the longest word
+
+    // it("should recieve a string and return the longest word", () => {
+    //     // TODO
+    //     // expect(...)
+    //     expect(findLongestWord("en to tre træ")).toBe("to")
+    // });
+
 });
 
-describe("charCount", () => {
-  //   //this should fail cause there is no t
-  //   it("should how many characters are in a word", () => {
-  //   expect(charCount("apple")).toEqual({ a: 1, p: 2, t: 2, e: 1, l: 1 });
-  // });
-  it("should how many characters are in a word", () => {
-    expect(charCount("vitest")).toEqual({ v: 1, i: 1, t: 2, e: 1, s: 1 });
-  });
-});
+// Lav selv tests for de andre functions...
 
-describe("mergeSortedArrays", () => {
-  // it should fail cause it is the wrong numbers
-  // it("should get two arrays and meger them into only 1 array", () => {
-  //     expect(mergeSortedArrays([1, 2], [2, 4])).toEqual([1, 2, 3, 4])
-  // })
+describe("charcount", () => {
 
-  it("should get two arrays and meger them into only 1 array", () => {
-    expect(mergeSortedArrays([1, 2], [3, 4])).toEqual([1, 2, 3, 4]);
-  });
-});
-
-describe("flattenArray", () => {
-  //it should fail cause it ahs worng expect
-  // it("should get a nested array and make it flat", () => {
-  //     expect(flattenArray([1, 2, 3])).toEqual([1, 2, 3, 4])
-  // })
-  it("should get a nested array and make it flat", () => {
-    expect(flattenArray([1, 2, [3, 4]])).toEqual([1, 2, 3, 4]);
-  });
-});
-//
-describe('groupBy', () => {
-  const input = [
-    { type: 'fruit', name: 'apple' },
-    { type: 'vegetable', name: 'lettuce' },
-    { type: 'fruit', name: 'banana' },
-  ]
-//   //it should fail it is in the wring order
-//   it('groups objects by the specified property', () => {
-//     expect(groupBy(input, 'type')).toEqual({
-//       fruit: [
-//           { type: 'fruit', name: 'banana' },
-//         { type: 'fruit', name: 'apple' }
-//       ],
-//       vegetable: [{ type: 'vegetable', name: 'lettuce' }],
-//     })
-//   })
-  it('groups objects by the specified property', () => {
-    expect(groupBy(input, 'type')).toEqual({
-      fruit: [
-        { type: 'fruit', name: 'apple' },
-        { type: 'fruit', name: 'banana' },
-      ],
-      vegetable: [{ type: 'vegetable', name: 'lettuce' }],
+    it("should count how many of each characters there are", () => {
+        expect(charCount("vitest")).toEqual({
+            v: 1, i: 1, t: 2, e: 1, s: 1
+        })
     })
-  })
+
+    // this should fail because there is 2 t's, not 1
+
+    // it("should count how many of each characters there are", () => {
+    //     expect(charCount("vitest")).toEqual({
+    //         v:1, i:1, t:1, e:1, s:1
+    //     })
+    // })
 })
 
+describe("mergeSortedArrays", () => {
 
+    it("should test if merged is equal to i +j", () => {
+        expect(mergeSortedArrays([1, 2], [3, 4])).toEqual([1, 2, 3, 4])
+    })
 
-describe('debounce', () => {
-   it('delays function execution until after delay', () => {
-    vi.useFakeTimers()
-    const mockFn = vi.fn()
-    const debounced = debounce(mockFn, 200)
+    // this should fail because the arrays merged isnt 1, 2, 3, 4
 
-    debounced()
-    debounced()
-    debounced()
+    // it("should test if merged is equal to i +j", () => {
+    //     expect(mergeSortedArrays([1, 2], [1, 2])).toEqual([1, 2, 3, 4])
+    // })
+})
 
-    expect(mockFn).not.toHaveBeenCalled()
+describe("flattenArray", () => {
 
-    vi.advanceTimersByTime(200)
+    it("should test that the array is flatten out, so no more nested arrays", () => {
+        expect(flattenArray([1, [2, 3], 4, [5, [6, 7]], 8])).toEqual([1, 2, 3, 4, 5, 6, 7, 8])
+    })
 
-    expect(mockFn).toHaveBeenCalledTimes(1)
+    // this should fail because there is still a nested array
 
-    vi.useRealTimers()
-  })
+    // it("should test that the array is flatten out, so no more nested arrays", () => {
+    //     expect(flattenArray([1, [2, 3], 4, [5, [6, 7]], 8])).toEqual([1, 2, 3, 4, 5, 6, [7, 8]])
+    // })
+})
+
+describe("groupBy", () => {
+
+    const input = [
+        { type: 'fruit', name: 'banana' },
+        { type: 'notFruit', name: 'tacos' },
+        { type: 'fruit', name: 'apple' },
+        { type: 'notFruit', name: 'salsa' }
+    ]
+
+    it("should group the obj's together with other obj's that have the same key", () => {
+        expect(groupBy(input, 'type')).toEqual({
+            fruit: [
+                { type: 'fruit', name: 'banana' },
+                { type: 'fruit', name: 'apple' }
+            ],
+            notFruit: [
+                { type: 'notFruit', name: 'tacos' },
+                { type: 'notFruit', name: 'salsa' }
+            ]
+        })
+    })
+})
+
+describe("debounce", () => {
+
+    it("should run the function x amount of time after its called", () => {
+        vi.useFakeTimers();
+
+        const func = vi.fn();
+        const debounced = debounce(func, 500);
+
+        debounced();
+        debounced();
+        debounced();
+
+        expect(func).not.toHaveBeenCalled();
+
+        vi.advanceTimersByTime(499);
+        expect(func).not.toHaveBeenCalled();
+
+        vi.advanceTimersByTime(1);
+        expect(func).toHaveBeenCalledTimes(1);
+
+        vi.useRealTimers();
+    })
 })
