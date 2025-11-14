@@ -46,7 +46,7 @@ importers:
         specifier: ^7.1.7
         version: 7.1.12(sass-embedded@1.93.3)(sass@1.93.3)
       vitest:
-        specifier: ^4.0.6
+        specifier: ^4.0.7
         version: 4.0.7(sass-embedded@1.93.3)(sass@1.93.3)
 
 packages:

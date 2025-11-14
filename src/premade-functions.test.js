@@ -1,7 +1,22 @@
 import { describe, expect, it, vi } from "vitest";
-import { findLongestWord, charCount, mergeSortedArrays, flattenArray, groupBy, debounce } from "./premade-functions.js";
+import {
+  findLongestWord,
+  charCount,
+  mergeSortedArrays,
+  flattenArray,
+  groupBy,
+  debounce,
+} from "./premade-functions.js";
+import { should } from "vitest";
 
 describe("findLongestWord", () => {
+  //this shouldnt work
+  //   it("should recieve a string and return the longest word", () => {
+  //     expect(findLongestWord("I like peperoni pizza")).toBe("like");
+  //   });
+  it("should recieve a string and return the longest word", () => {
+    expect(findLongestWord("I like peperoni pizza")).toBe("peperoni");
+  });
 
     it("should recieve a string and return the longest word", () => {
         // TODO
